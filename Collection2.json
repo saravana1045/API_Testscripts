@@ -1,0 +1,142 @@
+{
+	"info": {
+		"_postman_id": "5401c4a8-e749-433c-97ca-3c49cb6390f9",
+		"name": "SignUp Automation scripts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Signup",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "10b251d9-32e6-4adb-b3eb-ba983cfd88ac",
+						"exec": [
+							"var random =Math.random().toString(36).substring(2);",
+							"var email_address= \"saravana\" + random + \"@blemediasolutions.com\"; ",
+							"pm.environment.set(\"email_address\", email_address);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "d9df5a93-9f44-4fd4-968b-6443e6496b76",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"",
+							"pm.test(\"Status code name has OK\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is less than 300ms\", function () {",
+							"    pm.expect(pm.response.responseTime) <= (200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.result.email_address).to.eql(pm.environment.get(\"email_address\"));",
+							"     pm.expect(jsonData.result.status).to.eql(\"not_verfied\");",
+							"});",
+							"",
+							"",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"status\");",
+							"        pm.expect(pm.response.text()).to.include(\"status_code\");",
+							"                pm.expect(pm.response.text()).to.include(\"message\");",
+							"",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Url",
+						"value": "https://stagingrv4.redtie.co:1221/api/",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "apikey",
+							"value": "RVY0VnVLUDhQSHZST2hFM04xcnFnZDkzU2J2bGtZVVM1S2NNaXY2NHh4cmhhdEM5cjMyMTJaMXA",
+							"type": "text"
+						},
+						{
+							"key": "secret",
+							"value": "R1eqD2twI3E4",
+							"type": "text"
+						},
+						{
+							"key": "email_address",
+							"value": "{{email_address}}",
+							"type": "text"
+						},
+						{
+							"key": "browser",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "agent",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "ip_address",
+							"value": "106.66.151.132",
+							"type": "text"
+						},
+						{
+							"key": "country",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://stagingrv4.redtie.co:1221/api/user/signup",
+					"protocol": "https",
+					"host": [
+						"stagingrv4",
+						"redtie",
+						"co"
+					],
+					"port": "1221",
+					"path": [
+						"api",
+						"user",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
